@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Movies from "./components/movies";
 
 ReactDOM.render(
   <React.StrictMode>
-    < />
+    <Movies />
   </React.StrictMode>,
   document.getElementById('root')
 );
