@@ -1,16 +1,26 @@
-export const TableHeader = props => {
+import {Component} from "react";
+import {GetIconSort} from "../functionsJS/getIconSort";
 
-    const { columns } = props;
+export default class TableHeader extends Component {
+    render() {
 
-    return(
-        <thead>
-        <tr>
-            <th>#</th>
-            { columns.map((column) =>
-                <th key={column.path}>
-                    {column.label}
-                </th>
-            )}
-        </tr>
-        </thead>
-    );}
+        const { columns, onSort, sortColumn } = this.props;
+
+        return(
+            <thead>
+            <tr>
+                <th>#</th>
+                { columns.map((column) =>
+                    <th
+                        className="clickable"
+                        key={column.path || column.key}
+                        onClick={() => onSort(column.path)}
+                    >
+                        {column.label} {GetIconSort(column, sortColumn)}
+                    </th>
+                )}
+            </tr>
+            </thead>
+        );
+    };
+}
