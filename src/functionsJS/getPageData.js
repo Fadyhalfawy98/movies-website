@@ -9,5 +9,5 @@ export const getPageData = (allMovies, selectedGenre, pageSize, currentPage) => 
 
     const movies = paginate(moviesFiltered, pageSize, currentPage);
 
-    return ({ length: moviesFiltered.length, data: movies });
+    return ({ length: moviesFiltered.length, filteredMovies: movies });
 }
