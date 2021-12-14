@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Like = ({onLike, movie}) => {
+export const Like = ({ onLike, movie }) => {
     let classes = "fa fa-heart";
 
     if (!movie.liked)
