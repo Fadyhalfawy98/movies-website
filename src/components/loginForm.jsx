@@ -1,9 +1,12 @@
+import React from "react";
 import {Component} from "react";
 import HandleSubmit from "../functionsJS/handleSubmit";
+import FormInput from "./formInput";
+import CheckBoxForm from "./checkBoxForm";
 
 export default class LoginForm extends Component {
     state = {
-        account: {username: "", password: "" }
+        account: {email: "", password: "" }
     }
 
     render() {
@@ -11,40 +14,28 @@ export default class LoginForm extends Component {
 
         return (
             <form onSubmit={HandleSubmit}>
+                <FormInput
+                    name="email"
+                    value={account.email}
+                    onChange={this.handleChange}
+                    label="Email"
+                    placeHolder="Email@"
 
-                <div className="form-group">
-                    <label htmlFor="email">Email address</label>
-                    <input id="email"
-                           value={account.username}
-                           type="text"
-                           name="username"
-                           onChange={this.handleChange}
-                           className="form-control"
-                           aria-describedby="emailHelp"
-                           placeholder="Email@"/>
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
-                </div>
+                />
 
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input id="password"
-                           value={account.password}
-                           type="text"
-                           name="password"
-                           onChange={this.handleChange}
-                           className="form-control"
-                           placeholder="Password"/>
-                </div>
+                <FormInput
+                    name="password"
+                    value={account.password}
+                    onChange={this.handleChange}
+                    label="Password"
+                    placeHolder="Password"
+                />
 
-                <div className="form-group form-check">
-                    <input type="checkbox"
-                           className="form-check-input"
-                           id="Check1"/>
-                    <label className="form-check-label"
-                           htmlFor="Check1">Remember me</label>
-                </div>
-                
+                <CheckBoxForm
+                    label="Remember me"
+                    id="Check1"
+                />
+
                 <button className="btn btn-outline-info btn-space">Login</button>
 
                 <button className="btn btn-outline-danger">Forget Password</button>
