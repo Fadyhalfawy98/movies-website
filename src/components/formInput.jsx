@@ -1,4 +1,4 @@
-const FormInput = ({ name, label, value, onChange, placeHolder }) => {
+const FormInput = ({ name, label, value, error, onChange, placeHolder }) => {
     return(
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
@@ -9,6 +9,12 @@ const FormInput = ({ name, label, value, onChange, placeHolder }) => {
                    onChange={onChange}
                    className="form-control"
                    placeholder={placeHolder}/>
+            {error && <div
+                className="alert alert-danger"
+                role="alert">
+                {error}
+            </div>
+            }
         </div>
     );
 }
