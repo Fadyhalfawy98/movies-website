@@ -38,9 +38,14 @@ export default class LoginForm extends Component {
                     id="Check1"
                 />
 
-                <button className="btn btn-outline-info btn-space">Login</button>
+                <button className="btn btn-outline-info btn-space"
+                        disabled={this.validate()}
 
-                <button className="btn btn-outline-danger">Forget Password</button>
+                >Login</button>
+
+                <button className="btn btn-outline-danger"
+                        disabled={this.validate()}
+                >Forget Password</button>
             </form>
         );
     }
