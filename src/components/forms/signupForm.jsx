@@ -36,20 +36,25 @@ export default class SignupForm extends MainForm {
         const { history } = this.props;
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                {this.renderFormInput("email", "Email", "Email@")}
-                {this.renderFormInput("password", "Password", "Password...", "password")}
-                {this.renderFormInput("confirmPassword", "Confirm-Password", "Confirm-Password...", "password")}
-                {this.renderFormInput("phoneNumber", "Phone-Number", "Phone-Number")}
+            <React.Fragment>
+
+                <h1>Sign Up here!</h1>
+
+                <form>
+                    {this.renderFormInput("email", "Email", "Email@")}
+                    {this.renderFormInput("password", "Password", "Password...", "password")}
+                    {this.renderFormInput("confirmPassword", "Confirm-Password", "Confirm-Password...", "password")}
+                    {this.renderFormInput("phoneNumber", "Phone-Number", "Phone-Number")}
 
 
-                {this.renderSelectGender("ChooseMenu", "", "male", "feMale", "sheMale", "Gender","Choose Gender...", "Male", "FeMale", "SheMale")}
+                    {this.renderSelectGender("ChooseMenu", "", "male", "feMale", "sheMale", "Gender","Choose Gender...", "Male", "FeMale", "SheMale")}
 
-                {this.renderCheckBox("Agree with all conditions", "checkBox-2")}
+                    {this.renderCheckBox("Agree with all conditions", "checkBox-2")}
 
-                {this.renderButton("btn-outline-info", "Signup", history, "/login")}
-                {this.renderButton("btn-outline-danger", "Back", history, "/login")}
-            </form>
+                    {this.renderButton("btn-outline-info", "Signup", history, "/login")}
+                    {this.renderButton("btn-outline-danger", "Back", false, history, "/login")}
+                </form>
+            </React.Fragment>
         );
     }
 }
