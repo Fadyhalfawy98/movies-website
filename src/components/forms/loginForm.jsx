@@ -25,15 +25,21 @@ export default class LoginForm extends MainForm {
         const { history } = this.props;
 
         return (
-            <form>
-                {this.renderFormInput("email", "Email", 'Email@')}
-                {this.renderFormInput("password", "Password", 'password...', "Password")}
+            <React.Fragment>
 
-                {this.renderCheckBox("Remember me", "checkBox")}
+                <h1>Login</h1>
 
-                {this.renderButton("btn-outline-info", "Login", history, "/movies")}
-                {this.renderButton("btn-outline-danger", "Forget-Password", history, "/signup")}
-            </form>
+                <form>
+                    {this.renderFormInput("email", "Email", 'Email@')}
+                    {this.renderFormInput("password", "Password", 'password...', "Password")}
+
+                    {this.renderCheckBox("Remember me", "checkBox")}
+
+                    {this.renderButton("btn-outline-info", "Login", history, "/movies")}
+                    {this.renderButton("btn-outline-danger", "Forget-Password", false, history, "/signup")}
+                </form>
+
+            </React.Fragment>
         );
     }
 }
