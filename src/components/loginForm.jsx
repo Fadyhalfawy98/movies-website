@@ -3,6 +3,7 @@ import {Component} from "react";
 import FormInput from "./formInput";
 import CheckBoxForm from "./checkBoxForm";
 import Joi from "joi-browser";
+import HandleButtonTransfer from "../functionsJS/handleButtonTransfer";
 
 export default class LoginForm extends Component {
     state = {
@@ -13,8 +14,10 @@ export default class LoginForm extends Component {
     render() {
         const { account, errors } = this.state;
 
+        const { history } = this.props;
+
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <FormInput
                     name="email"
                     value={account.email}
@@ -39,12 +42,14 @@ export default class LoginForm extends Component {
                 />
 
                 <button className="btn btn-outline-info btn-space"
-                        disabled={this.validate()}
+                        // disabled={this.validate()}
+                        onClick={() => this.handleSubmit(history)}
 
                 >Login</button>
 
                 <button className="btn btn-outline-danger"
-                        disabled={this.validate()}
+                        // disabled={this.validate()}
+                        onClick={() => HandleButtonTransfer(history, "/signup")}
                 >Forget Password</button>
             </form>
         );
@@ -61,12 +66,12 @@ export default class LoginForm extends Component {
         this.setState({ account, errors })
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-
+    handleSubmit = history => {
         const errors = this.validate();
         this.setState({ errors: errors || {} });
         if (errors) return;
+
+        HandleButtonTransfer(history, "/movies");
     };
 
     schema = {
