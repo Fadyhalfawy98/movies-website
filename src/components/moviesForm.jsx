@@ -1,5 +1,5 @@
 import React from "react";
-import onSave from "../functionsJS/handleSaveButton";
+import HandleButtonTransfer from "../functionsJS/handleButtonTransfer";
 const MoviesForm = ({ match, history }) => {
   return(
       <div>
@@ -7,7 +7,7 @@ const MoviesForm = ({ match, history }) => {
 
         <button
             className={"btn btn-outline-info my-2 my-sm-0"}
-            onClick={() => onSave(history)}>
+            onClick={() => HandleButtonTransfer(history, "/movies")}>
           Save
         </button>
 
