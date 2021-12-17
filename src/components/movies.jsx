@@ -16,7 +16,7 @@ export default class Movies extends Component {
         sortColumn: { path: 'title', order: 'asc' }
     };
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         this.setState({movies: getMovies(), genres: getGenres()})
     }
 
