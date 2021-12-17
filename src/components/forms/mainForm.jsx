@@ -1,8 +1,9 @@
-import FormInput from "./formInput";
+import InputForm from "./inputForm";
 import React, {Component} from "react";
 import CheckBoxForm from "./checkBoxForm";
 import Joi from "joi-browser";
-import HandleButtonTransfer from "../functionsJS/handleButtonTransfer";
+import HandleButtonTransfer from "../../functionsJS/handleButtonTransfer";
+import SelectGenderForm from "./selectGenderForm";
 
 class Form extends Component {
     state = {
@@ -55,7 +56,7 @@ class Form extends Component {
         const { account, errors } = this.state;
 
         return(
-            <FormInput
+            <InputForm
                 name={name}
                 type={type}
                 value={account[name]}
@@ -83,6 +84,23 @@ class Form extends Component {
                 onClick={() => this.handleClickButton(history, path)}>
             {label}
         </button>
+        );
+    }
+
+    renderSelectGender(id, value1, value2, value3, value4, label, label1, label2, label3, label4) {
+        return(
+            <SelectGenderForm
+                id={id}
+                value1={value1}
+                value2={value2}
+                value3={value3}
+                value4={value4}
+                label={label}
+                label1={label1}
+                label2={label2}
+                label3={label3}
+                label4={label4}
+            />
         );
     }
 
