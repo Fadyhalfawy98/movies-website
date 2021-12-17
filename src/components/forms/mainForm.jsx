@@ -5,7 +5,7 @@ import Joi from "joi-browser";
 import HandleButtonTransfer from "../../functionsJS/handleButtonTransfer";
 import SelectGenderForm from "./selectGenderForm";
 
-class Form extends Component {
+class MainForm extends Component {
     state = {
         account: {},
         errors: {}
@@ -106,4 +106,4 @@ class Form extends Component {
 
 }
 
-export default Form;
+export default MainForm;

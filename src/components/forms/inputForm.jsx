@@ -1,4 +1,4 @@
-const FormInput = ({ name, label, error, ...rest }) => {
+const InputForm = ({ name, label, error, ...rest }) => {
     return(
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
@@ -17,4 +17,4 @@ const FormInput = ({ name, label, error, ...rest }) => {
     );
 }
 
-export default FormInput;
+export default InputForm;

@@ -1,8 +1,8 @@
 import React from "react";
 import Joi from "joi-browser";
-import Form from "./form";
+import MainForm from "./mainForm";
 
-export default class LoginForm extends Form {
+export default class LoginForm extends MainForm {
     state = {
         account: {email: "", password: "" },
         errors: {}

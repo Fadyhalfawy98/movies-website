@@ -1,6 +1,6 @@
 import React from "react";
 
-const SelectGender = ({ value1, value2, value3, value4, label1, label2, label3, label4, label, id }) => {
+const SelectGenderForm = ({ value1, value2, value3, value4, label1, label2, label3, label4, label, id }) => {
     return(
         <div className="form-group">
             <label className="form-choose-label"
@@ -16,4 +16,4 @@ const SelectGender = ({ value1, value2, value3, value4, label1, label2, label3, 
     );
 }
 
-export default SelectGender;
+export default SelectGenderForm;

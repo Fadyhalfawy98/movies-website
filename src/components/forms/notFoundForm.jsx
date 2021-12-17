@@ -1,7 +1,7 @@
-const ErrorFound = () => {
+const NotFoundForm = () => {
     return(
         <h1> Not Found </h1>
     );
 }
 
-export default ErrorFound;
+export default NotFoundForm;
