@@ -77,10 +77,10 @@ class MainForm extends Component {
         );
     }
 
-    renderButton(style, label, history, path) {
+    renderButton(style, label, disabled= this.validate(), history, path) {
         return(
         <button className={"btn " + style + " btn-space"}
-                disabled={this.validate()}
+                disabled={disabled}
                 onClick={() => this.handleClickButton(history, path)}>
             {label}
         </button>
