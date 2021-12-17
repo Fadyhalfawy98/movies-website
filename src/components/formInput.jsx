@@ -1,10 +1,10 @@
-const FormInput = ({ name, label, value, error, onChange, placeHolder }) => {
+const FormInput = ({ name, label, value, type, error, onChange, placeHolder }) => {
     return(
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
             <input id={name}
                    value={value}
-                   type="text"
+                   type={type}
                    name={name}
                    onChange={onChange}
                    className="form-control"
