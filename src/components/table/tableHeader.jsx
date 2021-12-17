@@ -1,5 +1,5 @@
 import {Component} from "react";
-import {GetIconSort} from "../functionsJS/getIconSort";
+import {GetIconSort} from "../../helperFunctions/getIconSort";
 
 export default class TableHeader extends Component {
     render() {

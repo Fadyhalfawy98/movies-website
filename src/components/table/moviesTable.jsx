@@ -1,4 +1,4 @@
-import {Like} from "./like";
+import {Like} from "../common/like";
 import {Component} from "react";
 import {DisplayTable} from "./displayTable";
 import {Link} from "react-router-dom";

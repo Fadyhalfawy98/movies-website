@@ -2,7 +2,7 @@ import InputForm from "./inputForm";
 import React, {Component} from "react";
 import CheckBoxForm from "./checkBoxForm";
 import Joi from "joi-browser";
-import HandleButtonTransfer from "../../functionsJS/handleButtonTransfer";
+import HandleButtonTransfer from "../../helperFunctions/handleButtonTransfer";
 import SelectGenderForm from "./selectGenderForm";
 
 class MainForm extends Component {

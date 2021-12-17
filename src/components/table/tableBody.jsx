@@ -1,6 +1,6 @@
 import {Component} from "react";
-import {RenderTable} from "../functionsJS/renderTable";
-import {CreateKey} from "../functionsJS/createKey";
+import {RenderTable} from "../../helperFunctions/renderTable";
+import {CreateKey} from "../../helperFunctions/createKey";
 
 export default class TableBody extends Component {
 

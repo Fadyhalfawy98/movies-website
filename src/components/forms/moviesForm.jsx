@@ -1,5 +1,5 @@
 import React from "react";
-import HandleButtonTransfer from "../../functionsJS/handleButtonTransfer";
+import HandleButtonTransfer from "../../helperFunctions/handleButtonTransfer";
 const MoviesForm = ({ match, history }) => {
   return(
       <div>

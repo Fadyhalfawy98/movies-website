@@ -1,10 +1,10 @@
 import {Component} from "react";
 import {genres, getGenres} from "../services/fakeGenreService";
 import {getMovies} from "../services/fakeMovieService";
-import {ListGroup} from "./listGroup";
-import Pagination from "./pagination";
-import {getPageData} from "../functionsJS/getPageData";
-import MoviesTable from "./moviesTable";
+import {ListGroup} from "./common/listGroup";
+import Pagination from "./common/pagination";
+import {getPageData} from "../helperFunctions/getPageData";
+import MoviesTable from "./table/moviesTable";
 
 export default class Movies extends Component {
     state = {
