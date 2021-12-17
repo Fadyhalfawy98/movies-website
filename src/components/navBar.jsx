@@ -17,13 +17,18 @@ const NavBar = () => {
                         <NavLink className="nav-item nav-link" to="/rentals">
                             Rentals
                         </NavLink>
-                        <NavLink className="nav-item nav-link" to="/login">
-                            Login
-                        </NavLink>
-
                 </div>
 
             </div>
+                <div className="navbar-nav">
+                    <NavLink className="nav-item nav-link" to="/login">
+                        Login
+                    </NavLink>
+
+                    <NavLink className="nav-item nav-link" to="/signup">
+                        Signup
+                    </NavLink>
+                </div>
                 <form className="form-inline my-2 my-lg-0">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search"
                            aria-label="Search"/>
