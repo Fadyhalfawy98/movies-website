@@ -42,14 +42,14 @@ class MainForm extends Component {
         this.setState({ account, errors })
     }
 
-    handleClickButton = (history, path) => {
+    handleClickButton = (history, path, label) => {
         if (path === "/movies") {
             const errors = this.validate();
             this.setState({errors: errors || {}});
             if (errors) return;
         }
 
-        HandleButtonTransfer(history, path);
+        HandleButtonTransfer(history, path, label);
     };
 
     renderFormInput(name, label, placeHolder, type="text") {
@@ -77,11 +77,11 @@ class MainForm extends Component {
         );
     }
 
-    renderButton(style, label, disabled= this.validate(), history, path) {
+    renderButton(style, label, history, path, disabled) {
         return(
         <button className={"btn " + style + " btn-space"}
                 disabled={disabled}
-                onClick={() => this.handleClickButton(history, path)}>
+                onClick={() => this.handleClickButton(history, path, label)}>
             {label}
         </button>
         );
