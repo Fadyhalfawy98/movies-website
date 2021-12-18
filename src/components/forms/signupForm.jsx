@@ -51,8 +51,8 @@ export default class SignupForm extends MainForm {
 
                     {this.renderCheckBox("Agree with all conditions", "checkBox-2")}
 
-                    {this.renderButton("btn-outline-info", "Signup", history, "/login")}
-                    {this.renderButton("btn-outline-danger", "Back", false, history, "/login")}
+                    {this.renderButton("btn-outline-info", "Signup", history, "/login", this.validate())}
+                    {this.renderButton("btn-outline-danger", "Back", history, "/login", false)}
                 </form>
             </React.Fragment>
         );
