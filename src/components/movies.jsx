@@ -1,10 +1,12 @@
 import {Component} from "react";
+import React from "react";
 import {genres, getGenres} from "../services/fakeGenreService";
 import {getMovies} from "../services/fakeMovieService";
 import {ListGroup} from "./common/listGroup";
 import Pagination from "./common/pagination";
 import {getPageData} from "../helperFunctions/getPageData";
 import MoviesTable from "./table/moviesTable";
+import {Link} from "react-router-dom";
 
 export default class Movies extends Component {
     state = {
@@ -27,6 +29,7 @@ export default class Movies extends Component {
 
         return(
             <div>
+
                 <h1>There are {length} movies in the {selectedGenre.name}</h1>
 
                 <div className="row">
@@ -57,8 +60,18 @@ export default class Movies extends Component {
                             currentPage={currentPage}
                             onPageChange={this.handlePageChange}
                         />
-                 </div>
+                    </div>
                 </div>
+
+                <h1> To add a new movie click the button</h1>
+
+                <Link
+                    to={"/movies/new"}
+                    className={"btn btn-outline-info"}
+                    style={ { marginBottom: 20 } }>
+                    New Movie
+                </Link>
+
             </div>
         );
     };
