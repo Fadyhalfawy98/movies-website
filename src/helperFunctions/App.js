@@ -10,6 +10,7 @@ import MoviesForm from "../components/forms/moviesForm";
 import NotFoundForm from "../components/forms/notFoundForm";
 import LoginForm from "../components/forms/loginForm";
 import SignupForm from "../components/forms/signupForm";
+import MovieForm from "../components/forms/movieForm";
 
 export class App extends Component {
     render() {
@@ -22,7 +23,8 @@ export class App extends Component {
 
                 <Switch>
                     <Route path={"/notfound"} to={NotFoundForm} />
-                    <Route path={"/movies/:id/:title?"} component={MoviesForm} />
+                    <Route path={"/movies/:id/:title"} component={MoviesForm} />
+                    <Route path={"/movies/new"} component={MovieForm} />
                     <Route path={"/movies"} component={Movies} />
                     <Route path={"/login"} component={LoginForm} />
                     <Route path={"/signup"} component={SignupForm} />
