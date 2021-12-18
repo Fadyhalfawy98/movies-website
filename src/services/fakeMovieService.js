@@ -1,3 +1,5 @@
+import {genres} from "./fakeGenreService";
+
 const movies = [
     {
         _id: "1",
@@ -75,4 +77,23 @@ const movies = [
 
 export function getMovies() {
     return movies;
+}
+
+export function getMovie(id) {
+    return movies.find(m => m._id === id);
+}
+
+export function saveMovie(movie) {
+    let movieInDb = movies.find(m => m._id === movie._id) || {};
+    movieInDb.title = movie.title;
+    movieInDb.genre = genres.find(g => g._id === movie.genre._id);
+    movieInDb.numberInStock = movie.numberInStock;
+    movieInDb.dailyRentalRate = movie.dailyRentalRate;
+
+    if (!movieInDb._id) {
+        movieInDb._id = Date.now().toString();
+        movies.push(movieInDb);
+    }
+
+    return movieInDb;
 }
