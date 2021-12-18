@@ -1,7 +1,8 @@
-const HandleButtonTransfer = (history, path)  => {
-  return(
-      history.push(path)
-  );
+const HandleButtonTransfer = (history, path, label)  => {
+
+  if (label === "Signup") return history.replace(path);
+
+  return history.push(path);
 }
 
 export default HandleButtonTransfer;
