@@ -35,8 +35,8 @@ export default class LoginForm extends MainForm {
 
                     {this.renderCheckBox("Remember me", "checkBox")}
 
-                    {this.renderButton("btn-outline-info", "Login", history, "/movies")}
-                    {this.renderButton("btn-outline-danger", "Forget-Password", false, history, "/signup")}
+                    {this.renderButton("btn-outline-info", "Login", history, "/movies", this.validate())}
+                    {this.renderButton("btn-outline-danger", "Forget-Password", history, "/signup", false)}
                 </form>
 
             </React.Fragment>
