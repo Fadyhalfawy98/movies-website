@@ -18,11 +18,13 @@ export default class SignupForm extends MainForm {
         password: Joi
             .string()
             .required()
+            .min(5)
             .label('Password'),
 
         confirmPassword: Joi
             .string()
             .required()
+            .min(5)
             .label('Confirm-Password'),
 
         phoneNumber: Joi
