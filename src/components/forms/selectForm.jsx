@@ -14,6 +14,12 @@ const SelectForm = ({ id, label, options, error, ...rest }) => {
                     </option>
                 ))}
             </select>
+            {error && <div
+                className="alert alert-danger"
+                role="alert">
+                {error}
+            </div>
+            }
         </div>
     );
 }
