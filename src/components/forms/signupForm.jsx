@@ -44,8 +44,8 @@ export default class SignupForm extends MainForm {
 
                 <form>
                     {this.renderFormInput("email", "Email", "Email@")}
-                    {this.renderFormInput("password", "Password", "Password...", "password")}
-                    {this.renderFormInput("confirmPassword", "Confirm-Password", "Confirm-Password...", "password")}
+                    {this.renderFormInput("password", "Password", "Password...", "password", "password")}
+                    {this.renderFormInput("confirmPassword", "Confirm-Password", "Confirm-Password...", "password", "password")}
                     {this.renderFormInput("phoneNumber", "Phone-Number", "Phone-Number")}
 
 
