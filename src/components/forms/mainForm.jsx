@@ -30,7 +30,7 @@ class MainForm extends Component {
         const schema = { [name]: this.schema[name] };
         const { error } = Joi.validate(obj, schema);
         return error ? error.details[0].message : null
-    };
+    }
 
     handleChange = ({ currentTarget: target }) => {
         const errors = {...this.state.errors};
@@ -40,21 +40,22 @@ class MainForm extends Component {
 
         const account = {...this.state.account};
         account[target.name] = target.value;
-        this.setState({ account, errors })
+        this.setState({ account, errors });
     }
 
-    handleClickButton = (history, path, label) => {
+    handleClickButton = (history, path, label, movie) => {
         if (path === "/movies") {
             const errors = this.validate();
             this.setState({errors: errors || {}});
             if (errors) return;
         }
 
-        HandleButtonTransfer(history, path, label);
+        HandleButtonTransfer(history, path, label, movie);
     };
 
     renderFormInput(name, label, placeHolder, type="text") {
         const { account, errors } = this.state;
+
 
         return(
             <InputForm
@@ -79,10 +80,11 @@ class MainForm extends Component {
     }
 
     renderButton(style, label, history, path, disabled) {
+        const {account} = this.state;
         return(
         <button className={"btn " + style + " btn-space"}
                 disabled={disabled}
-                onClick={() => this.handleClickButton(history, path, label)}>
+                onClick={() => this.handleClickButton(history, path, label, account)}>
             {label}
         </button>
         );
