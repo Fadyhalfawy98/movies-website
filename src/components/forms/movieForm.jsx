@@ -2,11 +2,11 @@ import React from "react";
 import Joi from "joi-browser";
 import MainForm from "./mainForm";
 import {getGenres} from "../../services/fakeGenreService";
-import {getMovie, saveMovie} from "../../services/fakeMovieService";
+import {getMovie} from "../../services/fakeMovieService";
 
 class MovieForm extends MainForm {
     state = {
-        movies: {
+        account: {
             title: "",
             genreId: "",
             numberInStock: "",
@@ -49,16 +49,17 @@ class MovieForm extends MainForm {
         const genres = getGenres();
         this.setState({ genres });
 
-        const movieId = match.params.id;
+        const movieId = match.params.new;
         if (movieId === "new") return;
 
         const movie = getMovie(movieId);
         if (!movie) return history.replace("/notfound");
 
-        this.setState({ movies: this.mapToViewModel(movie) })
+        this.setState({ movies: this.mapToViewModel(movie) });
     }
 
     render() {
+        const { genres } = this.state;
         const { history } = this.props;
 
         return (
@@ -66,11 +67,11 @@ class MovieForm extends MainForm {
 
                 <h1>Movie Form</h1>
 
-                <form onSubmit={this.doSubmit}>
+                <form>
                     {this.renderFormInput("title", "Title", 'Title')}
-                    {this.renderSelect("genreId", "Genre", this.schema.genres)}
+                    {this.renderSelect("genreId", "Genre", genres)}
                     {this.renderFormInput("numberInStock", "Number In Stock", 'Stock')}
-                    {this.renderFormInput("dailyRenderRate", "Rate", 'Your Rating')}
+                    {this.renderFormInput("dailyRentalRate", "Rate", "Your Rating")}
 
                     {this.renderButton("btn-outline-info", "Save", history, "/movies", this.validate())}
                 </form>
@@ -88,14 +89,5 @@ class MovieForm extends MainForm {
             dailyRentalRate: movie.dailyRentalRate
         };
     }
-
-    doSubmit = () => {
-        const { movies } = this.state;
-        const {history} = this.props;
-
-        saveMovie(movies);
-
-        history.push("/movies");
-    };
 }
 export default MovieForm;
