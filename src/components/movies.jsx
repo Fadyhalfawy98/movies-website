@@ -7,11 +7,13 @@ import Pagination from "./common/pagination";
 import {getPageData} from "../helperFunctions/getPageData";
 import MoviesTable from "./table/moviesTable";
 import {Link} from "react-router-dom";
+import SearchBoxForm from "./forms/searchBoxForm";
 
 export default class Movies extends Component {
     state = {
         movies: [],
         genres: [],
+        searchQuery: "",
         selectedGenre: genres[0],
         pageSize: 3,
         currentPage: 1,
@@ -23,9 +25,9 @@ export default class Movies extends Component {
     }
 
     render() {
-        const {movies: allMovies, genres, selectedGenre, pageSize, currentPage, sortColumn} = this.state;
+        const {movies: allMovies, genres, selectedGenre, pageSize, currentPage, sortColumn, searchQuery} = this.state;
 
-        const {length, filteredMovies} = getPageData(allMovies, selectedGenre, pageSize, currentPage, sortColumn);
+        const {length, filteredMovies} = getPageData(allMovies, selectedGenre, pageSize, currentPage, sortColumn, searchQuery);
 
         return(
             <div>
@@ -45,7 +47,10 @@ export default class Movies extends Component {
                     </div>
 
                     <div className="col">
-
+                        <SearchBoxForm
+                            value={searchQuery}
+                            onChange={this.handleSearch}
+                        />
                         <MoviesTable
                             filteredMovies={filteredMovies}
                             onDelete={this.handleDelete}
@@ -90,7 +95,7 @@ export default class Movies extends Component {
     }
 
     handleSelectedGenre = genre => {
-        this.setState({ selectedGenre: genre, currentPage: 1});
+        this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1});
     };
 
     handlePageChange = page => {
@@ -106,6 +111,10 @@ export default class Movies extends Component {
             sortColumn.order = 'asc';
         }
         this.setState({ sortColumn });
+    }
+
+    handleSearch = query => {
+        this.setState({ searchQuery: query, selectedGenre: "", currentPage: 1 });
     }
 
 }
