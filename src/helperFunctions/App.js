@@ -24,7 +24,7 @@ export class App extends Component {
                 <Switch>
                     <Route path={"/notfound"} to={NotFoundForm} />
                     <Route path={"/movies/:id/:title"} component={MoviesForm} />
-                    <Route path={"/movies/new"} component={MovieForm} />
+                    <Route path={"/movies/:new"} component={MovieForm} />
                     <Route path={"/movies"} component={Movies} />
                     <Route path={"/login"} component={LoginForm} />
                     <Route path={"/signup"} component={SignupForm} />
