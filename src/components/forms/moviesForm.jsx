@@ -8,7 +8,7 @@ const MoviesForm = ({ match, history }) => {
         <button
             className={"btn btn-outline-info my-2 my-sm-0"}
             onClick={() => HandleButtonTransfer(history, "/movies")}>
-          Save
+          OK!
         </button>
 
       </div>
