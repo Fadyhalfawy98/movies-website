@@ -1,6 +1,7 @@
 import {Component} from "react";
 import React from "react";
-import {genres, getGenres} from "../services/fakeGenreService";
+// import {genres, getGenres} from "../services/fakeGenreService";
+import {getGenres} from "../services/genreService";
 import {getMovies} from "../services/fakeMovieService";
 import {ListGroup} from "./common/listGroup";
 import Pagination from "./common/pagination";
@@ -14,14 +15,17 @@ export default class Movies extends Component {
         movies: [],
         genres: [],
         searchQuery: "",
-        selectedGenre: genres[0],
+        selectedGenre: "",
         pageSize: 3,
         currentPage: 1,
         sortColumn: { path: 'title', order: 'asc' }
     };
 
-    UNSAFE_componentWillMount() {
-        this.setState({movies: getMovies(), genres: getGenres()})
+    async componentDidMount() {
+        const { data } = await getGenres();
+        const genres = [{_id: "", name: "All Movies"}, ...data];
+
+        this.setState({movies: getMovies(), genres});
     }
 
     render() {
@@ -32,7 +36,7 @@ export default class Movies extends Component {
         return(
             <div>
 
-                <h1>There are {length} movies in the {selectedGenre.name}</h1>
+                <h1>There are {length} movies in the {selectedGenre.name} database</h1>
 
                 <div className="row">
 
@@ -116,5 +120,5 @@ export default class Movies extends Component {
     handleSearch = query => {
         this.setState({ searchQuery: query, selectedGenre: "", currentPage: 1 });
     }
-
+    
 }
