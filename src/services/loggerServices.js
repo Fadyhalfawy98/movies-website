@@ -3,7 +3,7 @@ import {Integrations} from "@sentry/tracing";
 
 function init() {
     Sentry.init({
-        dsn: "https://70de9af3f59d4beaa7ad79edc81aab61@o1097021.ingest.sentry.io/6118167",
+        dsn: "https://81c378bc839045d6a429aacf3588d3a0@o1097021.ingest.sentry.io/6118652",
         integrations: [new Integrations.BrowserTracing()],
 
         // Set tracesSampleRate to 1.0 to capture 100%
