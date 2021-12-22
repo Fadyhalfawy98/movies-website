@@ -11,13 +11,15 @@ function init() {
         // We recommend adjusting this value in production
         tracesSampleRate: 1.0,
     });
-};
+}
 
 function log (error) {
     Sentry.captureException(error);
-};
+}
 
-export default {
+const logger = {
     init,
     log
-};
+}
+
+export default logger;
