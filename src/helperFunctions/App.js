@@ -1,6 +1,6 @@
 import React from "react";
 import {Component} from "react";
-import Movies from "../components/movies";
+import Movies from "../components/main/movies";
 import { ToastContainer } from "react-toastify";
 import Route from "react-router-dom/Route";
 import CustomersForm from "../components/forms/customersForm";
