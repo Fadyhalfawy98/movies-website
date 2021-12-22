@@ -1,6 +1,7 @@
 import React from "react";
 import {Component} from "react";
 import Movies from "../components/movies";
+import { ToastContainer } from "react-toastify";
 import Route from "react-router-dom/Route";
 import CustomersForm from "../components/forms/customersForm";
 import RentalsForm from "../components/forms/rentalsForm";
@@ -17,24 +18,26 @@ export class App extends Component {
         return (
             <React.Fragment>
 
-            <NavBar />
+                <ToastContainer />
 
-            <main className={"container"}>
+                <NavBar />
 
-                <Switch>
-                    <Route path={"/notfound"} to={NotFoundForm} />
-                    <Route path={"/movies/:id/:title"} component={MoviesForm} />
-                    <Route path={"/movies/:new"} component={MovieForm} />
-                    <Route path={"/movies"} component={Movies} />
-                    <Route path={"/login"} component={LoginForm} />
-                    <Route path={"/signup"} component={SignupForm} />
-                    <Route path={"/customers"} component={CustomersForm} />
-                    <Route path={"/rentals"} component={RentalsForm} />
-                    <Redirect from={"/"} exact to={"/movies"} />
-                    <Redirect to={"/notfound"} />
-                </Switch>
+                <main className={"container"}>
 
-            </main>
+                    <Switch>
+                        <Route path={"/notfound"} to={NotFoundForm} />
+                        <Route path={"/movies/:id/:title"} component={MoviesForm} />
+                        <Route path={"/movies/:new"} component={MovieForm} />
+                        <Route path={"/movies"} component={Movies} />
+                        <Route path={"/login"} component={LoginForm} />
+                        <Route path={"/signup"} component={SignupForm} />
+                        <Route path={"/customers"} component={CustomersForm} />
+                        <Route path={"/rentals"} component={RentalsForm} />
+                        <Redirect from={"/"} exact to={"/movies"} />
+                        <Redirect to={"/notfound"} />
+                    </Switch>
+
+                </main>
 
             </React.Fragment>
         );
