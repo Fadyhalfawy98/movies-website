@@ -32,6 +32,15 @@ class MainForm extends Component {
         return error ? error.details[0].message : null
     }
 
+    handleSubmit = e => {
+        e.preventDefault();
+        const errors = this.validate();
+        this.setState({errors: errors || {} });
+        if (errors) return;
+
+        this.doSubmit();
+    };
+
     handleChange = ({ currentTarget: target }) => {
         const errors = {...this.state.errors};
         const errorMessage = this.validateProperty(target);
@@ -43,19 +52,18 @@ class MainForm extends Component {
         this.setState({ account, errors });
     }
 
-    handleClickButton = (history, path, label, movie) => {
+    handleClickButton = (history, path, label) => {
         if (path === "/movies") {
             const errors = this.validate();
             this.setState({errors: errors || {}});
             if (errors) return;
         }
 
-        HandleButtonTransfer(history, path, label, movie);
+        HandleButtonTransfer(history, path, label);
     };
 
     renderFormInput(name, label, placeHolder, type="text") {
         const { account, errors } = this.state;
-
 
         return(
             <InputForm
@@ -79,12 +87,11 @@ class MainForm extends Component {
         );
     }
 
-    renderButton(style, label, history, path, disabled) {
-        const {account} = this.state;
+    renderButton(style, label, history, path, disabled= true) {
         return(
         <button className={"btn " + style + " btn-space"}
                 disabled={disabled}
-                onClick={() => this.handleClickButton(history, path, label, account)}>
+                onClick={() => this.handleClickButton(history, path, label)}>
             {label}
         </button>
         );
