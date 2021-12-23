@@ -7,7 +7,6 @@ import CustomersForm from "../components/forms/customersForm";
 import RentalsForm from "../components/forms/rentalsForm";
 import {Redirect, Switch} from "react-router-dom";
 import NavBar from "../components/common/navBar";
-import MoviesForm from "../components/forms/moviesForm";
 import NotFoundForm from "../components/forms/notFoundForm";
 import LoginForm from "../components/forms/loginForm";
 import SignupForm from "../components/forms/signupForm";
@@ -26,8 +25,7 @@ export class App extends Component {
 
                     <Switch>
                         <Route path={"/notfound"} to={NotFoundForm} />
-                        <Route path={"/movies/:id/:title"} component={MoviesForm} />
-                        <Route path={"/movies/:new"} component={MovieForm} />
+                        <Route path={"/movies/:id"} component={MovieForm} />
                         <Route path={"/movies"} component={Movies} />
                         <Route path={"/login"} component={LoginForm} />
                         <Route path={"/signup"} component={SignupForm} />
