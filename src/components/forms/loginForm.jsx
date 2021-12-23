@@ -18,6 +18,7 @@ export default class LoginForm extends MainForm {
         password: Joi
             .string()
             .required()
+            .min(5)
             .label('Password')
     };
 
