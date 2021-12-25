@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// @ts-ignore
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import logger from "./services/loggerServices";
 import './index.css';
 import reportWebVitals from './reportWebVitals';
