@@ -17,12 +17,18 @@ Axios.interceptors.response.use(null, error => {
     return Promise.reject(error);
 });
 //------------------------------------------------------------------------------------
-const axios = {
-  get: Axios.get,
-  post: Axios.post,
-  put: Axios.put,
-  patch: Axios.patch,
-  delete: Axios.delete
+
+function setJwt(jwt) {
+    Axios.defaults.headers.common["x-auth-token"] = jwt;
+}
+
+const http = {
+      get: Axios.get,
+      post: Axios.post,
+      put: Axios.put,
+      patch: Axios.patch,
+      delete: Axios.delete,
+      setJwt
 };
 
-export default axios;
+export default http;
