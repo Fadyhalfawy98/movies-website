@@ -1,5 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
+import auth from "../../services/authService";
 import MainForm from "./mainForm";
 
 export default class LoginForm extends MainForm {
@@ -36,11 +37,33 @@ export default class LoginForm extends MainForm {
 
                     {this.renderCheckBox("Remember me", "checkBox")}
 
-                    {this.renderButton("btn-outline-info", "Login", history, "/movies", this.validate())}
+                    {/*{this.renderButton("btn-outline-info", "Login", history, "/movies", this.validate())}*/}
+                    <button className={"btn btn-outline-info btn-space"}
+                            disabled={this.validate()}
+                            onClick={this.handleSubmit}>
+                        Login
+                    </button>
+
                     {this.renderButton("btn-outline-danger", "Forget-Password", history, "/signup", false)}
                 </form>
 
             </React.Fragment>
         );
+    }
+
+    doSubmit = async () => {
+        const { account, errors } = this.state;
+
+        try {
+            await auth.login(account.email, account.password);
+
+            window.location = "/";
+        } catch (e) {
+            if (e.response && e.response.status === 400) {
+                const error = {...errors};
+                error.email = e.response.data;
+                this.setState({errors: error});
+            }
+        }
     }
 }
