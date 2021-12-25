@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 const tokenKey = "token";
 
-http.setJwt(getJwt());
+http.jtw(getJwt());
 
 async function login(email, password) {
     const { data: jwt } = await http.post(config.authPath, { email, password });
@@ -37,7 +37,6 @@ const auth = {
     login,
     loginWithJwt,
     getCurrentUser,
-    getJwt,
     logout
 }
 
