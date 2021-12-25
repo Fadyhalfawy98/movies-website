@@ -1,36 +1,48 @@
 import React from "react";
 import {Component} from "react";
-import Movies from "../components/main/movies";
 import { ToastContainer } from "react-toastify";
 import Route from "react-router-dom/Route";
-import CustomersForm from "../components/forms/customersForm";
-import RentalsForm from "../components/forms/rentalsForm";
 import {Redirect, Switch} from "react-router-dom";
+import Movies from "../components/main/movies";
 import NavBar from "../components/common/navBar";
-import NotFoundForm from "../components/forms/notFoundForm";
+import Logout from "../components/common/logout";
 import LoginForm from "../components/forms/loginForm";
 import SignupForm from "../components/forms/signupForm";
 import MovieForm from "../components/forms/movieForm";
+import CustomersForm from "../components/forms/customersForm";
+import RentalsForm from "../components/forms/rentalsForm";
+import NotFoundForm from "../components/forms/notFoundForm";
+import auth from "../services/authService";
 
 export class App extends Component {
+
+    state = {};
+
+    componentDidMount() {
+        const user = auth.getCurrentUser();
+        this.setState({ user });
+    }
+
     render() {
+        const { user } = this.state;
         return (
             <React.Fragment>
 
                 <ToastContainer />
 
-                <NavBar />
+                <NavBar user={user} />
 
                 <main className={"container"}>
 
                     <Switch>
-                        <Route path={"/notfound"} to={NotFoundForm} />
                         <Route path={"/movies/:id"} component={MovieForm} />
                         <Route path={"/movies"} component={Movies} />
+                        <Route path={"/logout"} component={Logout} />
                         <Route path={"/login"} component={LoginForm} />
                         <Route path={"/signup"} component={SignupForm} />
                         <Route path={"/customers"} component={CustomersForm} />
                         <Route path={"/rentals"} component={RentalsForm} />
+                        <Route path={"/notfound"} to={NotFoundForm} />
                         <Redirect from={"/"} exact to={"/movies"} />
                         <Redirect to={"/notfound"} />
                     </Switch>
