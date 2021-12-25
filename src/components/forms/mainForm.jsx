@@ -8,13 +8,13 @@ import SelectGenderForm from "./selectGenderForm";
 
 class MainForm extends Component {
     state = {
-        account: {},
+        data: {},
         errors: {}
     };
 
     validate() {
         const options = {abortEarly: false};
-        const { error } = Joi.validate(this.state.account, this.schema, options);
+        const { error } = Joi.validate(this.state.data, this.schema, options);
 
         if (!error) return null;
 
@@ -42,14 +42,15 @@ class MainForm extends Component {
     };
 
     handleChange = ({ currentTarget: target }) => {
-        const errors = {...this.state.errors};
+        const { data, errors } = this.state;
+        const getErrors = { ...errors };
         const errorMessage = this.validateProperty(target);
-        if (errorMessage) errors[target.name] = errorMessage;
-        else delete errors[target.name];
+        if (errorMessage) getErrors[target.name] = errorMessage;
+        else delete getErrors[target.name];
 
-        const account = {...this.state.account};
-        account[target.name] = target.value;
-        this.setState({ account, errors });
+        const getData = {...data};
+        getData[target.name] = target.value;
+        this.setState({ data: getData, errors: getErrors });
     }
 
     handleClickButton = (history, path, label) => {
@@ -63,13 +64,13 @@ class MainForm extends Component {
     };
 
     renderFormInput(name, label, placeHolder, type="text") {
-        const { account, errors } = this.state;
+        const { data, errors } = this.state;
 
         return(
             <InputForm
                 name={name}
                 type={type}
-                value={account[name]}
+                value={data[name]}
                 onChange={this.handleChange}
                 label={label}
                 placeholder={placeHolder}
@@ -98,12 +99,12 @@ class MainForm extends Component {
     }
 
     renderSelect(name, label, options) {
-        const {account, errors} = this.state;
+        const {data, errors} = this.state;
 
         return(
             <SelectForm
                 name={name}
-                value={account[name]}
+                value={data[name]}
                 label={label}
                 onChange={this.handleChange}
                 options={options}

@@ -6,7 +6,7 @@ import {getMovie, saveMovie} from "../../services/movieService";
 
 class MovieForm extends MainForm {
     state = {
-        account: {
+        data: {
             title: "",
             genreId: "",
             numberInStock: "",
@@ -86,7 +86,7 @@ class MovieForm extends MainForm {
             if (movieId === "new") return;
 
             const {data: movie} = await getMovie(movieId);
-            this.setState({ account: this.mapToViewModel(movie) });
+            this.setState({ data: this.mapToViewModel(movie) });
         }
         catch (e) {
             if (e.response && e.response.status === 404)
@@ -105,10 +105,10 @@ class MovieForm extends MainForm {
     }
 
     doSubmit = async () => {
-        const { account } = this.state;
+        const { data } = this.state;
         const { history } = this.props;
 
-        await saveMovie(account);
+        await saveMovie(data);
         return history.replace("/movies");
     };
 }

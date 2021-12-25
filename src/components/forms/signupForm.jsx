@@ -6,7 +6,7 @@ import auth from "../../services/authService";
 
 export default class SignupForm extends MainForm {
     state = {
-        account: {email: "", password: "", confirmPassword: "", phoneNumber: "", name: ""},
+        data: {email: "", password: "", confirmPassword: "", phoneNumber: "", name: ""},
         errors: {}
     }
 
@@ -75,11 +75,11 @@ export default class SignupForm extends MainForm {
     }
 
     doSubmit = async () => {
-        const { account, errors } = this.state;
+        const { data, errors } = this.state;
         const {history} = this.props;
 
         try {
-            const jwt = await signUp(account);
+            const jwt = await signUp(data);
             auth.loginWithJwt(jwt.headers["x-auth-token"]);
             history.replace("/login");
         }

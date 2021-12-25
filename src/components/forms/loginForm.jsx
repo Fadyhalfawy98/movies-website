@@ -5,7 +5,7 @@ import MainForm from "./mainForm";
 
 export default class LoginForm extends MainForm {
     state = {
-        account: {email: "", password: "" },
+        data: {email: "", password: "" },
         errors: {}
     }
 
@@ -52,10 +52,10 @@ export default class LoginForm extends MainForm {
     }
 
     doSubmit = async () => {
-        const { account, errors } = this.state;
+        const { data, errors } = this.state;
 
         try {
-            await auth.login(account.email, account.password);
+            await auth.login(data.email, data.password);
 
             window.location = "/";
         } catch (e) {
