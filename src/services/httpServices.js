@@ -28,7 +28,7 @@ const http = {
       put: Axios.put,
       patch: Axios.patch,
       delete: Axios.delete,
-      setJwt
+      jtw: setJwt
 };
 
 export default http;
