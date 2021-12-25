@@ -1,4 +1,6 @@
 {
   "genrePath": "http://localhost:3900/api/genres",
-  "moviePath": "http://localhost:3900/api/movies"
+  "moviePath": "http://localhost:3900/api/movies",
+  "userPath": "http://localhost:3900/api/users",
+  "authPath": "http://localhost:3900/api/auth"
 }
