@@ -1,12 +1,12 @@
 import React from "react";
 import Joi from "joi-browser";
 import MainForm from "./mainForm";
-import {getGenres} from "../../services/fakeGenreService";
-import {getMovie} from "../../services/fakeMovieService";
+import {getGenres} from "../../services/genreService";
+import {getMovie, saveMovie} from "../../services/movieService";
 
 class MovieForm extends MainForm {
     state = {
-        account: {
+        data: {
             title: "",
             genreId: "",
             numberInStock: "",
@@ -29,56 +29,70 @@ class MovieForm extends MainForm {
             .label('Genre'),
 
         numberInStock: Joi
-            .string()
+            .number()
+            .integer()
             .required()
             .min(0)
             .max(100)
             .label('Number-In-Stock'),
 
         dailyRentalRate: Joi
-            .string()
+            .number()
+            .integer()
             .required()
             .min(0)
             .max(10)
             .label('Rate')
     };
 
-    componentDidMount() {
-        const { history, match } = this.props;
-
-        const genres = getGenres();
-        this.setState({ genres });
-
-        const movieId = match.params.new;
-        if (movieId === "new") return;
-
-        const movie = getMovie(movieId);
-        if (!movie) return history.replace("/notfound");
-
-        this.setState({ movies: this.mapToViewModel(movie) });
+    async componentDidMount() {
+        await this.populateGenre();
+        await this.populateMovie();
     }
 
     render() {
         const { genres } = this.state;
-        const { history } = this.props;
 
         return (
             <React.Fragment>
 
                 <h1>Movie Form</h1>
 
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     {this.renderFormInput("title", "Title", 'Title')}
                     {this.renderSelect("genreId", "Genre", genres)}
                     {this.renderFormInput("numberInStock", "Number In Stock", 'Stock')}
                     {this.renderFormInput("dailyRentalRate", "Rate", "Your Rating")}
 
-                    {this.renderButton("btn-outline-info", "Save", history, "/movies", this.validate())}
+                    <button className={"btn btn-outline-info"}>
+                        Save
+                    </button>
                 </form>
 
             </React.Fragment>
         );
     }
+
+    async populateGenre() {
+        const {data: genres} = await getGenres();
+        this.setState({ genres });
+    };
+
+    async populateMovie() {
+        const { history, match } = this.props;
+
+        try {
+            const movieId = match.params.id;
+            if (movieId === "new") return;
+
+            const {data: movie} = await getMovie(movieId);
+            this.setState({ data: this.mapToViewModel(movie) });
+        }
+        catch (e) {
+            if (e.response && e.response.status === 404)
+                history.replace("/notfound");
+        }
+    };
 
     mapToViewModel(movie) {
         return {
@@ -89,5 +103,13 @@ class MovieForm extends MainForm {
             dailyRentalRate: movie.dailyRentalRate
         };
     }
+
+    doSubmit = async () => {
+        const { data } = this.state;
+        const { history } = this.props;
+
+        await saveMovie(data);
+        return history.replace("/movies");
+    };
 }
 export default MovieForm;

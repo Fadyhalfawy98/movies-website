@@ -1,27 +1,34 @@
 import {Component} from "react";
 import React from "react";
-import {genres, getGenres} from "../services/fakeGenreService";
-import {getMovies} from "../services/fakeMovieService";
-import {ListGroup} from "./common/listGroup";
-import Pagination from "./common/pagination";
-import {getPageData} from "../helperFunctions/getPageData";
-import MoviesTable from "./table/moviesTable";
+import {toast} from "react-toastify";
+import {getGenres} from "../../services/genreService";
+import {deleteMovie, getMovies} from "../../services/movieService";
+import {ListGroup} from "../common/listGroup";
+import Pagination from "../common/pagination";
+import {getPageData} from "../../helperFunctions/getPageData";
+import MoviesTable from "../table/moviesTable";
 import {Link} from "react-router-dom";
-import SearchBoxForm from "./forms/searchBoxForm";
+import SearchBoxForm from "../forms/searchBoxForm";
+import auth from "../../services/authService";
 
 export default class Movies extends Component {
     state = {
         movies: [],
         genres: [],
         searchQuery: "",
-        selectedGenre: genres[0],
+        selectedGenre: "",
         pageSize: 3,
         currentPage: 1,
         sortColumn: { path: 'title', order: 'asc' }
     };
 
-    UNSAFE_componentWillMount() {
-        this.setState({movies: getMovies(), genres: getGenres()})
+    async componentDidMount() {
+        const { data } = await getGenres();
+        const genres = [{_id: "", name: "All Movies"}, ...data];
+
+        const { data: movies } = await getMovies();
+
+        this.setState({ movies, genres });
     }
 
     render() {
@@ -29,10 +36,14 @@ export default class Movies extends Component {
 
         const {length, filteredMovies} = getPageData(allMovies, selectedGenre, pageSize, currentPage, sortColumn, searchQuery);
 
+        const user = auth.getCurrentUser();
+
         return(
             <div>
 
-                <h1>There are {length} movies in the {selectedGenre.name}</h1>
+                { user &&
+                    <h1>There are {length} movies in the {selectedGenre.name} database</h1>
+                }
 
                 <div className="row">
 
@@ -68,14 +79,20 @@ export default class Movies extends Component {
                     </div>
                 </div>
 
-                <h1> To add a new movie click the button</h1>
+                { user && user.isAdmin &&
+                    <React.Fragment>
 
-                <Link
+                    <h1> To add a new movie click the button</h1>
+
+                    <Link
                     to={"/movies/new"}
                     className={"btn btn-outline-info"}
-                    style={ { marginBottom: 20 } }>
+                    style={{marginBottom: 20}}>
                     New Movie
-                </Link>
+                    </Link>
+
+                    </React.Fragment>
+                }
 
             </div>
         );
@@ -89,9 +106,20 @@ export default class Movies extends Component {
         this.setState({ movies });
     }
 
-    handleDelete = movie => {
-        const movies = this.state.movies.filter(m => m._id !== movie._id);
-        this.setState({movies});
+    handleDelete = async movie => {
+        const { movies } = this.state;
+        const originalMovies = movies;
+        const  moviesFilter = originalMovies.filter(m => m._id !== movie._id);
+
+        this.setState({ movies: moviesFilter });
+
+        try { await deleteMovie(movie._id); }
+        catch (e) {
+            if (e.response && e.response.status === 404)
+                toast.error('This post has already been deleted!');
+
+            this.setState({ movies: originalMovies });
+        }
     }
 
     handleSelectedGenre = genre => {
