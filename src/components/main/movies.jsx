@@ -35,10 +35,14 @@ export default class Movies extends Component {
 
         const {length, filteredMovies} = getPageData(allMovies, selectedGenre, pageSize, currentPage, sortColumn, searchQuery);
 
+        const { user } = this.props;
+
         return(
             <div>
 
-                <h1>There are {length} movies in the {selectedGenre.name} database</h1>
+                { user &&
+                    <h1>There are {length} movies in the {selectedGenre.name} database</h1>
+                }
 
                 <div className="row">
 
@@ -74,14 +78,20 @@ export default class Movies extends Component {
                     </div>
                 </div>
 
-                <h1> To add a new movie click the button</h1>
+                { user &&
+                    <React.Fragment>
 
-                <Link
+                    <h1> To add a new movie click the button</h1>
+
+                    <Link
                     to={"/movies/new"}
                     className={"btn btn-outline-info"}
-                    style={ { marginBottom: 20 } }>
+                    style={{marginBottom: 20}}>
                     New Movie
-                </Link>
+                    </Link>
+
+                    </React.Fragment>
+                }
 
             </div>
         );
