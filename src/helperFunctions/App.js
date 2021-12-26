@@ -13,6 +13,7 @@ import CustomersForm from "../components/forms/customersForm";
 import RentalsForm from "../components/forms/rentalsForm";
 import NotFoundForm from "../components/forms/notFoundForm";
 import auth from "../services/authService";
+import ProtectedRoute from "../components/common/protectedRoute";
 
 export class App extends Component {
 
@@ -25,6 +26,7 @@ export class App extends Component {
 
     render() {
         const { user } = this.state;
+
         return (
             <React.Fragment>
 
@@ -35,13 +37,17 @@ export class App extends Component {
                 <main className={"container"}>
 
                     <Switch>
-                        <Route path={"/movies/:id"} component={MovieForm} />
-                        <Route path={"/movies"} component={Movies} />
+                        {/*<Route path={"/movies/:id"} component={MovieForm} />*/}
+                        <ProtectedRoute path={"/movies/:id"} component={MovieForm} />
+                        {/*<Route path={"/movies"} component={Movies} />*/}
+                        <Route path={"/movies"} render={props => <Movies { ...props } user={user}/>} />
                         <Route path={"/logout"} component={Logout} />
                         <Route path={"/login"} component={LoginForm} />
                         <Route path={"/signup"} component={SignupForm} />
-                        <Route path={"/customers"} component={CustomersForm} />
-                        <Route path={"/rentals"} component={RentalsForm} />
+                        {/*<Route path={"/customers"} component={CustomersForm} />*/}
+                        <ProtectedRoute path={"/customers"} component={CustomersForm} />
+                        {/*<Route path={"/rentals"} component={RentalsForm} />*/}
+                        <ProtectedRoute path={"/rentals"} component={RentalsForm} />
                         <Route path={"/notfound"} to={NotFoundForm} />
                         <Redirect from={"/"} exact to={"/movies"} />
                         <Redirect to={"/notfound"} />
