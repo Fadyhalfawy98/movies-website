@@ -9,6 +9,7 @@ import {getPageData} from "../../helperFunctions/getPageData";
 import MoviesTable from "../table/moviesTable";
 import {Link} from "react-router-dom";
 import SearchBoxForm from "../forms/searchBoxForm";
+import auth from "../../services/authService";
 
 export default class Movies extends Component {
     state = {
@@ -35,7 +36,7 @@ export default class Movies extends Component {
 
         const {length, filteredMovies} = getPageData(allMovies, selectedGenre, pageSize, currentPage, sortColumn, searchQuery);
 
-        const { user } = this.props;
+        const user = auth.getCurrentUser();
 
         return(
             <div>
@@ -78,7 +79,7 @@ export default class Movies extends Component {
                     </div>
                 </div>
 
-                { user &&
+                { user && user.isAdmin &&
                     <React.Fragment>
 
                     <h1> To add a new movie click the button</h1>
