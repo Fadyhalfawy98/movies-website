@@ -27,6 +27,8 @@ export class App extends Component {
     render() {
         const { user } = this.state;
 
+
+
         return (
             <React.Fragment>
 
@@ -39,8 +41,7 @@ export class App extends Component {
                     <Switch>
                         {/*<Route path={"/movies/:id"} component={MovieForm} />*/}
                         <ProtectedRoute path={"/movies/:id"} component={MovieForm} />
-                        {/*<Route path={"/movies"} component={Movies} />*/}
-                        <Route path={"/movies"} render={props => <Movies { ...props } user={user}/>} />
+                        <Route path={"/movies"} component={Movies} />
                         <Route path={"/logout"} component={Logout} />
                         <Route path={"/login"} component={LoginForm} />
                         <Route path={"/signup"} component={SignupForm} />
